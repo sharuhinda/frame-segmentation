@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Model checkpoints and inference output
+*.pt
+*.pth
+runs/

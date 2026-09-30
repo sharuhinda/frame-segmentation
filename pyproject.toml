@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "frame-segmentation"
+version = "0.1.0"
+description = "A small local harness for comparing YOLO and RF-DETR instance segmentation."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "pillow>=10.0",
+]
+
+[project.optional-dependencies]
+yolo = [
+  "torch>=2.6",
+  "ultralytics>=8.4.166,<9",
+]
+rfdetr = ["rfdetr>=1.11"]
+models = [
+  "torch>=2.6",
+  "ultralytics>=8.4.166,<9",
+  "rfdetr>=1.11",
+]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.9",
+]
+
+[project.scripts]
+frame-segment = "frame_segmentation.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/frame_segmentation"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
